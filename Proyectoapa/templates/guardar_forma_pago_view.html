@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <div>
+        <h1>Guardar forma de pago</h1>
+    <form action="/formas_de_pago/" method="POST">
+        {% csrf_token %}
+        <label for="forma_pago">Forma de pago</label>
+        <input type="text" id="forma_pago" name="forma_pago" placeholder="Forma de Pago">
+    
+        <input type="submit" value="Guardar">
+    </form>
+    </div>
+        
+    <div>
+        {% if formas %}
+            {% for forma in formas %}
+                <hr>
+                <p>Nombre: {{forma.forma_pago}}</p>
+                
+            {% endfor %}
+        {% else %}
+            <h3>No hay formas de pago cargados</h3>
+        {% endif %}
+        
+    </div>
+</div>
+
+
+
+{% endblock %}

@@ -39,3 +39,22 @@ def guardar_producto_view(request):
         return render(request, "guardar_producto_view.html", context)
     
     return render(request, "guardar_producto_view.html")
+
+
+def guardar_forma_pago_view(request):
+    if request.method =="POST":
+        ultima_forma = Pago.objects.last()
+        ultimo_id = 0
+    
+        if ultima_forma:
+            ultimo_id = ultima_forma.pk
+            
+        forma = Pago(ultimo_id + 1, request.POST["forma_pago"])
+        forma.save()
+        formas = Pago.objects.all()
+        context  = {
+            "formas" : formas
+        }
+        return render(request, "guardar_forma_pago_view.html", context)
+        
+    return render(request, "guardar_forma_pago_view.html")
