@@ -11,7 +11,7 @@ def guardar_cliente_view(request):
         if ultimo_cliente:
             ultimo_id = ultimo_cliente.pk
             
-        cliente = Cliente(request.POST["nombre"], request.POST["empresa"])
+        cliente = Cliente(ultimo_id + 1, request.POST["nombre"], request.POST["empresa"])
         cliente.save()
         clientes = Cliente.objects.all()
         context = {

@@ -1,0 +1,39 @@
+{%extends 'base.html'%}
+
+{% block content %}
+<div>
+    <div>
+        <h1>Guardar producto</h1>
+    <form action="/producto/" method="POST">
+        {% csrf_token %}
+        <label for="nombre">Nombre de producto</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre producto">
+
+        <label for="marca">Marca de producto</label>
+        <input type="text" id="marca" name="marca" placeholder="Marca">
+
+        <label for="precio">Precio de producto</label>
+        <input type="number" id="precio" name="precio" placeholder="Precio">
+
+        <input type="submit" value="Guardar">
+    </form>
+    </div>
+        
+    <div>
+        {% if productos %}
+            {% for producto in productos %}
+                <hr>
+                <p>Nombre: {{producto.nombre}}</p>
+                <p>Marca: {{producto.marca}}</p>
+                <p>Precio: {{producto.precio}}</p>
+            {% endfor %}
+        {% else %}
+            <h3>No hay productos cargados</h3>
+        {% endif %}
+        
+    </div>
+</div>
+
+
+
+{% endblock %}
