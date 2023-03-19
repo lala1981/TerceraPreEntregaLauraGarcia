@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Appapa.views import guardar_cliente_view, guardar_producto_view, guardar_forma_pago_view
+from Appapa.views import guardar_cliente_view, guardar_producto_view, guardar_forma_pago_view, formulario_busqueda
 
 
 urlpatterns = [
@@ -23,5 +23,6 @@ urlpatterns = [
     path('cliente/', guardar_cliente_view),
     path('producto/', guardar_producto_view),
     path('formas_de_pago/', guardar_forma_pago_view),
+    path('buscar/', formulario_busqueda),
     
 ]

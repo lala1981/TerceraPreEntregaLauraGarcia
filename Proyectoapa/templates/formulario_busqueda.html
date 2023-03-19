@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <div>
+        <h1>Buscar Cliente</h1>
+    <form action="/buscar/" method="POST">
+        {% csrf_token %}
+        <label for="nombre">Buscar</label>
+        <input style="width:300px" type="text" id="busqueda" name="busqueda" placeholder="Ingrese nombre del cliente o empresa">
+    
+        <input type="submit" value="Buscar">
+    </form>
+    </div>
+        
+    <div>
+        {% if coincidencias %}
+            {% for cliente in coincidencias %}
+                <hr>
+                <p>Nombre: {{cliente.nombre}}</p>
+                <p>Empresa: {{cliente.empresa}}</p>
+            
+            {% endfor %}
+        {% else %}
+            <h3>No hubo coincidencias</h3>
+        {% endif %}
+        
+    </div>
+</div>
+
+
+
+{% endblock %}

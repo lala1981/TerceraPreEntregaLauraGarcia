@@ -13,13 +13,13 @@ def guardar_cliente_view(request):
             
         cliente = Cliente(ultimo_id + 1, request.POST["nombre"], request.POST["empresa"])
         cliente.save()
-        clientes = Cliente.objects.all()
-        context = {
-            "clientes": clientes 
-        }
-        return render(request, "guardar_cliente_view.html", context)
     
-    return render(request, "guardar_cliente_view.html")
+    clientes = Cliente.objects.all()
+    context = {
+        "clientes": clientes 
+    }
+    
+    return render(request, "guardar_cliente_view.html", context)
 
 def guardar_producto_view(request):
     
@@ -32,13 +32,12 @@ def guardar_producto_view(request):
             
         producto = Producto(ultimo_id + 1, request.POST["nombre"], request.POST["marca"], request.POST["precio"])
         producto.save()
-        productos = Producto.objects.all()
-        context = {
-            "productos": productos 
-        }
-        return render(request, "guardar_producto_view.html", context)
     
-    return render(request, "guardar_producto_view.html")
+    productos = Producto.objects.all()
+    context = {
+        "productos": productos 
+    }
+    return render(request, "guardar_producto_view.html", context)
 
 
 def guardar_forma_pago_view(request):
@@ -51,10 +50,21 @@ def guardar_forma_pago_view(request):
             
         forma = Pago(ultimo_id + 1, request.POST["forma_pago"])
         forma.save()
-        formas = Pago.objects.all()
-        context  = {
-            "formas" : formas
+    
+    formas = Pago.objects.all()
+    context  = {
+        "formas" : formas
+    }
+    
+    return render(request, "guardar_forma_pago_view.html", context)
+
+def formulario_busqueda(request):
+    if request.method == "POST":
+        clientes = Cliente.objects.filter(nombre__contains = request.POST["busqueda"]).values() | Cliente.objects.filter(empresa__contains = request.POST["busqueda"]).values()
+        context = {
+            "coincidencias": clientes
         }
-        return render(request, "guardar_forma_pago_view.html", context)
         
-    return render(request, "guardar_forma_pago_view.html")
+        return render(request, "formulario_busqueda.html", context)
+    
+    return render(request, "formulario_busqueda.html")
