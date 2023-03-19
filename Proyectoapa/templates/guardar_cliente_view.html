@@ -1,0 +1,39 @@
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <div>
+        <div>
+            <h1>Guardar cliente</h1>
+        <form action="/cliente/" method="POST">
+            {% csrf_token %}
+            <label for="nombre">Nombre de cliente</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre cliente">
+    
+            <label for="empresa">Empresa de cliente</label>
+            <input type="text" id="empresa" name="empresa" placeholder="Empresa">
+    
+            <input type="submit" value="Guardar">
+        </form>
+        </div>
+            
+        <div>
+            {% if clientes %}
+                {% for cliente in clientes %}
+                    <hr>
+                    <p>Nombre: {{cliente.nombre}}</p>
+                    <p>Empresa: {{cliente.empresa}}</p>
+                    
+                {% endfor %}
+            {% else %}
+                <h3>No hay clientes cargados</h3>
+            {% endif %}
+            
+        </div>
+    </div>
+    
+    
+    
+    {% endblock %}
+
+    
+
